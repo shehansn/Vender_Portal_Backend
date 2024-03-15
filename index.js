@@ -93,16 +93,6 @@ app.post('/upload', upload.array('images'), async (req, res) => {
 });
 
 
-// //save product api
-// app.post("/addNewProduct", async (req, res) => {
-//   console.log(req.body)
-//   const data = await productModel(req.body)
-//   const datasave = await data.save()
-//   if (!datasave)
-//     res.send({ message: "Product Adding Failed" })
-
-//   res.send({ message: "Product Added successfully" })
-// })
 
 //edit product api
 app.put("/editProduct/:prodId", upload.array('images'), async (req, res) => {
@@ -156,28 +146,6 @@ app.post("/addToFav/:prodId", async (req, res) => {
 
 })
 
-//deleet from favourite api
-app.post("/removeFromFav/:prodId", async (req, res) => {
-  const productId = await favProductModel.findById(req.params.prodId);
-
-  if (!productId) {
-
-    const data = await favProductModel(req.params.prodId)
-    const datasave = await data.save()
-    if (!datasave)
-      res.send({ message: "Product Adding Failed" })
-
-    res.send({ message: "Product Added To Favourite successfully" })
-  } else {
-    const dataSave = await favProductModel.findByIdAndRemove(req.params.prodId);
-    if (!dataSave)
-      res.send({ message: "Product Removing Failed" })
-
-    res.send({ message: "Product Removed From Favourite successfully" })
-
-  }
-
-})
 
 //delete product api
 app.delete("/deleteProd", async (req, res) => {
