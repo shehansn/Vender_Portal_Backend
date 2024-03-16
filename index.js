@@ -164,6 +164,21 @@ app.delete("/deleteProd", async (req, res) => {
 
 })
 
+
+
+//search products
+app.get("/searchProducts/:prodName", async (req, res) => {
+  const name = req.params.prodName;
+  const products = await productModel.find({ productName: { $regex: new RegExp(name, 'i') } });
+  // console.log(products)
+  if (products){
+    res.json(products);
+  }else{
+   return res.status(404).send({ message: "Products not found" });
+
+  }
+})
+
 //get all products api
 app.get("/product", async (req, res) => {
   const data = await productModel.find({})
